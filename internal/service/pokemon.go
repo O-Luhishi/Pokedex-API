@@ -16,20 +16,14 @@ func NewPokemonService() *PokemonService {
 
 func (ps *PokemonService) GetPokemon(ctx context.Context, id uint64) (*models.Pokemon, error) {
 	if id == 1 {
-		abilities := []string{"Blaze", "Dodge"}
 		return &models.Pokemon{
-			Id:        0,
 			Name:      "Charmander",
-			Abilities: abilities,
-			Type:      "Fire",
+			Abilities: "",
 		}, nil
 	} else if id == 2 {
-		abilities := []string{"Overgrow", "Dodge"}
 		return &models.Pokemon{
-			Id:        2,
 			Name:      "Bulbasaur",
-			Abilities: abilities,
-			Type:      "Grass",
+			Abilities: "abilities",
 		}, nil
 	} else {
 		// We'll add error handling later when we search through a proper datasource!
@@ -37,19 +31,6 @@ func (ps *PokemonService) GetPokemon(ctx context.Context, id uint64) (*models.Po
 	}
 }
 
-func (ps *PokemonService) ListPokemon(ctx context.Context) *models.Pokemons {
-	return &models.Pokemons{Pokemons: []models.Pokemon{
-		{
-			Id:        0,
-			Name:      "Charmander",
-			Abilities: []string{"Blaze", "Dodge"},
-			Type:      "Fire",
-		},
-		{
-			Id:        2,
-			Name:      "Bulbasaur",
-			Abilities: []string{"Overgrow", "Dodge"},
-			Type:      "Grass",
-		},
-	}}
+func (ps *PokemonService) ListPokemon(ctx context.Context) *models.Pokemon {
+	return nil
 }
