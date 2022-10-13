@@ -11,7 +11,7 @@ import (
 
 type PokemonService interface {
 	GetPokemon(ctx context.Context, id uint64) (*models.Pokemon, error)
-	ListPokemon(ctx context.Context) *models.Pokemons
+	ListPokemon(ctx context.Context) *models.Pokemon
 }
 
 type PokemonController struct {

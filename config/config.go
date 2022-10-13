@@ -1,30 +1,35 @@
 package config
 
 import (
+	"github.com/joeshaw/envdecode"
 	"time"
 )
 
 type Conf struct {
-	Server serverConfig
-	Debug  bool
+	Server   Server
+	Database Database
+	Debug    bool `env:"DEBUG,required"`
 }
 
-type serverConfig struct {
-	Port         int
-	TimeoutRead  time.Duration
-	TimeoutWrite time.Duration
-	TimeoutIdle  time.Duration
+type Server struct {
+	Port         int           `env:"SERVER_PORT,required"`
+	TimeoutRead  time.Duration `env:"SERVER_TIMEOUT_READ,required"`
+	TimeoutWrite time.Duration `env:"SERVER_TIMEOUT_WRITE,required"`
+	TimeoutIdle  time.Duration `env:"SERVER_TIMEOUT_IDLE,required"`
 }
 
-// NewConfig Todo: We'll set these an env variables later when we dockerize the application!
-func NewConfig() *Conf {
-	return &Conf{
-		Server: serverConfig{
-			Port:         8080,
-			TimeoutRead:  5,
-			TimeoutWrite: 180,
-			TimeoutIdle:  15,
-		},
-		Debug: false,
+type Database struct {
+	Port     int    `env:"DB_PORT,required"`
+	Host     string `env:"DB_HOST,required"`
+	Username string `env:"DB_USER,required"`
+	Password string `env:"DB_PASS,required"`
+	DBName   string `env:"DB_NAME,required"`
+}
+
+func NewConfig() (*Conf, error) {
+	var config Conf
+	if err := envdecode.StrictDecode(&config); err != nil {
+		return nil, err
 	}
+	return &config, nil
 }
