@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS pokemon
     "name"         VARCHAR(255) NOT NULL,
     "abilities"    TEXT [] NOT NULL,
     "type_id"      BIGINT NOT NULL,
-    "created_at"   TIMESTAMP    NOT NULL
+    "created_at"   TIMESTAMP NOT NULL
 );
 
 ALTER TABLE "pokemon" ADD FOREIGN KEY ("type_id") REFERENCES pokemon_types ("id");

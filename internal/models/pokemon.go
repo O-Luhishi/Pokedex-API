@@ -1,8 +1,8 @@
 package models
 
 type Pokemon struct {
-	Name      string `gorm:"column:pokemon_name;not null; default:null"`
-	Abilities string `gorm:"column:abilities;not null; default:null"`
+	Name      string
+	Abilities string
 }
 
 type PokemonDto struct {
